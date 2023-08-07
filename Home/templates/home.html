@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title></title>
+</head>
+<body>
+
+   <h1>ngan hang co lai suat tien gui thap nhat theo tung moc thoi gian </h1>
+
+    <select id="box">
+        <option value="alo" selected> chọn thời gian ở đây</option>
+        <option value="below_1_month">không kỳ hạn</option>
+        <option value="1 month">1 tháng</option>
+        <option value="2 months">2 tháng</option>
+        <option value="3 months">3 tháng</option>
+        <option value="4 months">4 tháng</option>
+        <option value="5 months">5 tháng</option>
+        <option value="6 months">6 tháng</option>
+        <option value="7 months">7 tháng</option>
+        <option value="8 months">8 tháng</option>
+        <option value="9 months">9 tháng</option>
+        <option value="10 months">10 tháng</option>
+        <option value="11 months">11 tháng</option>
+        <option value="12 months">12 tháng</option>
+        <option value="24 months">24 tháng</option>
+        <option value="36 months">36 tháng</option>
+    </select>
+    <script>
+        document.getElementById("box").addEventListener("change", function() {
+        const selectedOption = this.value;
+        if (selectedOption === "below_1_month") {
+            window.location.href = "{% url 'lowest1' %}";
+        }
+        if (selectedOption === "1 month") {
+            window.location.href = "{% url 'lowest2' %}";
+        };
+        if (selectedOption === "2 months") {
+            window.location.href = "{% url 'lowest3' %}";
+        };
+        if (selectedOption === "3 months") {
+            window.location.href = "{% url 'lowest4' %}";
+        };
+        if (selectedOption === "4 months") {
+            window.location.href = "{% url 'lowest5' %}";
+        };
+        if (selectedOption === "5 months") {
+            window.location.href = "{% url 'lowest6' %}";
+        };
+        if (selectedOption === "6 months") {
+            window.location.href = "{% url 'lowest7' %}";
+        };
+        if (selectedOption === "7 months") {
+            window.location.href = "{% url 'lowest8' %}";
+        };
+        if (selectedOption === "8 months") {
+            window.location.href = "{% url 'lowest9' %}";
+        };
+        if (selectedOption === "9 months") {
+            window.location.href = "{% url 'lowest10' %}";
+        };
+        if (selectedOption === "10 months") {
+            window.location.href = "{% url 'lowest11' %}";
+        };
+        if (selectedOption === "11 months") {
+            window.location.href = "{% url 'lowest12' %}";
+        };
+        if (selectedOption === "12 months") {
+            window.location.href = "{% url 'lowest13' %}";
+        };
+        if (selectedOption === "24 months") {
+            window.location.href = "{% url 'lowest14' %}";
+        };
+        if (selectedOption === "36 months") {
+            window.location.href = "{% url 'lowest15' %}";
+        };
+    })    
+    </script>
+
+</body>
+</html>

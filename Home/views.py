@@ -205,5 +205,6 @@ def lowest15(request):
     lowest = min(thirty_six_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
-    return response
+    return res
 
+#comment để test

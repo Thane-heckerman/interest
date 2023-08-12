@@ -1,17 +1,36 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import re
 import requests
 import bs4
 import json
+from .forms import RegistrationForms
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+#tạo hàm login
 
-#send http request
+#tạo hàm register
+def register(request):
+    form = RegistrationForms()
+    if request.method == 'POST':
+        form = RegistrationForms(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/Home/login')
+    return render(request,'register.html', {'form':form})    
+#tạo hàm logout
+
+
+
+#trang chủ
 def index(request):
-   return render(request,'home.html')
+   return render(request,'mainpage.html')
 
 #logic code
+@login_required
+def interest(request):
+    return render(request,'home.html')
 
 def get_interest_rate(url,str):
     html = requests.get(url).content
@@ -116,95 +135,95 @@ twelve_months = {'vcb': vcb_interest[5] , 'tcb': tcb_interest[2] , 'bidv': bidv_
 twenty_four_months = {'vcb': vcb_interest[5] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }
 thirty_six_months = {'vcb': vcb_interest[5] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }
 
+@login_required
 def lowest1(request):
     lowest = min(below_one_month.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
     
-
+@login_required
 def lowest2(request):
     lowest = min(one_month.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest3(request):
     lowest = min(two_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest4(request):
     lowest = min(three_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest5(request):
     lowest = min(four_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest6(request):
     lowest = min(five_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest7(request):
     lowest = min(six_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest8(request):
     lowest = min(seven_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest9(request):
     lowest = min(eight_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest10(request):
     lowest = min(nine_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest11(request):
     lowest = min(ten_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest12(request):
     lowest = min(eleven_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest13(request):
     lowest = min(twelve_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest14(request):
     lowest = min(twenty_four_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
-
+@login_required
 def lowest15(request):
     lowest = min(thirty_six_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 
-#comment để test

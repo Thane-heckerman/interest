@@ -1,8 +1,13 @@
-one_month = {'vcb': 2 , 'tcb': 3 , 'bidv': 4 , 'vietin': 5 }
-two_month = {'vcb': 4 , 'tcb': 5 , 'bidv': 6 , 'vietin': 7 }
-lowest1 = min(one_month.items(), key=lambda x: x[1])
-lowest = min(two_month.items(), key=lambda x: x[1])
-print(id(one_month))
-print(id(two_month))
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-#done
+    def introduce(self):
+        print(f"Hello, my name is {self.name} and I am {self.age} years old.")
+
+name = input()
+age = input()
+
+person1 = Person(name,age)
+person1.introduce()

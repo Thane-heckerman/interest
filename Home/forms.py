@@ -10,6 +10,7 @@ class RegistrationForms(forms.Form):
     password1 = forms.CharField(label='Nhập password', widget=forms.PasswordInput())
     password2 = forms.CharField(label='Nhập lại password', widget=forms.PasswordInput())
 
+    
     # Hàm kiểm tra password 
     def PassCheck(self):
         # Trường hợp mật khẩu đã được nhập

@@ -7,7 +7,7 @@ class SearchHistory:
 
     def __call__(self, request):
         ignore_urls = ['/Home/interest/', '/Home/logout/', '/Home/login/', '/Home/']
-        if request.user.is_authenticated and not request.path in ignore_urls :
+        if request.user.is_authenticated and not request.path in ignore_urls and not request.path.startswith('/admin/') :
         # request.path not in ignored_urls:
             response = self.get_response(request)
             res = str(response.content).replace('b','',1)

@@ -138,7 +138,7 @@ twenty_four_months = {'vcb': vcb_interest[5] , 'tcb': tcb_interest[2] , 'bidv': 
 thirty_six_months = {'vcb': vcb_interest[5] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }
 
 @login_required
-@SearchHistory
+
 def lowest1(request):
     lowest = min(below_one_month.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
@@ -146,101 +146,107 @@ def lowest1(request):
     return response
     
 @login_required
-@SearchHistory
+
 def lowest2(request):
     lowest = min(one_month.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest3(request):
     lowest = min(two_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest4(request):
     lowest = min(three_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest5(request):
     lowest = min(four_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest6(request):
     lowest = min(five_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest7(request):
     lowest = min(six_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest8(request):
     lowest = min(seven_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest9(request):
     lowest = min(eight_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest10(request):
     lowest = min(nine_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest11(request):
     lowest = min(ten_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest12(request):
     lowest = min(eleven_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest13(request):
     lowest = min(twelve_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest14(request):
     lowest = min(twenty_four_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
 @login_required
-@SearchHistory
+
 def lowest15(request):
     lowest = min(thirty_six_months.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
     return response
+
+def history(request):
+    user_id = request.user.id
+    data = History.objects.all().order_by('-id').filter(user_id = user_id)[:10]
+    return render(request, 'home.html', {'data':data})
+
 

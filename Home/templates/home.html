@@ -78,5 +78,26 @@
         };
     })    
     </script>
+    
+    <h1>History Data</h1>
+    <table>
+        <tr>
+            <th>User ID</th>
+            <th>Result</th>
+            <th>Period</th>
+            <th>URL</th>
+            <th>Date</th>
+        </tr>
+        {% for item in data %}
+            <tr>
+                <td>{{ item.user_id }}</td>
+                <td>{{ item.result }}</td>
+                <td>{{ item.period }}</td>
+                <td>{{ item.url }}</td>
+                <td>{{ item.date }}</td>
+            </tr>
+        {% endfor %}
+    
+    </table>
 </body>
 </html>

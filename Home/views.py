@@ -32,7 +32,10 @@ def index(request):
 #logic code
 @login_required
 def interest(request):
-    return render(request,'home.html')
+    user_id = request.user.id
+    data = History.objects.all().order_by('-id').filter(user_id = user_id)[:10]
+    return render(request, 'home.html', {'data':data})
+    
 
 def get_interest_rate(url,str):
     html = requests.get(url).content
@@ -244,9 +247,6 @@ def lowest15(request):
     response = HttpResponse(res)
     return response
 
-def history(request):
-    user_id = request.user.id
-    data = History.objects.all().order_by('-id').filter(user_id = user_id)[:10]
-    return render(request, 'home.html', {'data':data})
+
 
 

@@ -24,5 +24,5 @@ urlpatterns =  [
     path('lowest_12_month/', login_required(views.lowest13), name='12 months'),
     path('lowest_24_month/', login_required(views.lowest14), name='24 months'),
     path('lowest_36_month/', login_required(views.lowest15), name='36 months'),
-
+    path('delete/<int:id>/',views.delete_history, name='delete_history')
 ]

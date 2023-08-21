@@ -36,6 +36,11 @@ def interest(request):
     data = History.objects.all().order_by('-id').filter(user_id = user_id)[:10]
     return render(request, 'home.html', {'data':data})
     
+#delete_history
+def delete_history(requeset,id):
+    history = History.objects.filter(id = id) #pk - primary key
+    history.delete()
+    return HttpResponseRedirect('/Home/interest')
 
 def get_interest_rate(url,str):
     html = requests.get(url).content

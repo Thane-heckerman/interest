@@ -95,6 +95,7 @@
                 <td>{{ item.period }}</td>
                 <td>{{ item.url }}</td>
                 <td>{{ item.date }}</td>
+                <td> <a href = "{% url 'delete_history' item.id %}">Delete</a></td>
             </tr>
         {% endfor %}
     

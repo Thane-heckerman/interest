@@ -37,7 +37,7 @@ def interest(request):
     return render(request, 'home.html', {'data':data})
     
 #delete_history
-def delete_history(requeset,id):
+def delete_history(request,id):
     history = History.objects.filter(id = id) #pk - primary key
     history.delete()
     return HttpResponseRedirect('/Home/interest')
@@ -61,7 +61,6 @@ def get_interest_rate(url,str):
 
 vcb_interest = []
 url_vcb='https://portal.vietcombank.com.vn/UserControls/TVPortal.TyGia/pListLaiSuat.aspx?CusstomType=1&BacrhID=1&InrateType=&isEn=False&numAfter=2'
-
 
 months = ['Không kỳ hạn',
         r'\u0031\u0034\u0020\u006e\u0067\u00e0\u0079', 
@@ -113,41 +112,70 @@ bidv_interest = set()
 for item in decode['hcm']['data']:
     bidv_interest.add(float(item['VND']))
 bidv_interest = list(bidv_interest)
-# print('BIDV: ' ,bidv_interest)
 
-# #tcb
-# #thông tin lãi suất của tcb là file download 
-# #6 tháng
+
+# tcb
+# thông tin lãi suất của tcb là file download 
+
 tcb_interest = [0.5, 4.30, 6.45]
 
 
-# interests = {** dict1, ** dict2, ** dict3, **dict4}
-# lowest = min(interests.items(), key=lambda x: x[1])
-# res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
 
-# return render(request,'interest.html','result')
-
+#def hàm lập dict cho các mốc thời gian và return là một kết quả sau đó viết function js để truyền kết quả đó vào trong hàm lowest 
 #lập dict cho các mốc thời gian
+def below (request):
+    below = {'below_one_month' : {'vcb': vcb_interest[0] , 'tcb': tcb_interest[0] , 'bidv': bidv_interest[0] , 'vietin': vietin_interest[2] }}
+    response = render(request, 'home.html',context=below)
+    return response
+def one_month (request):
+    one_month = {'one_month' : {'vcb': vcb_interest[2] , 'tcb': tcb_interest[1] , 'bidv': bidv_interest[1] , 'vietin': vietin_interest[3] }}
+    return render(request, 'home.html', context= one_month)
+def two_months (request):
+    two_months = {'two_months' : {'vcb': vcb_interest[2] , 'tcb': tcb_interest[1] ,'bidv': bidv_interest[1] , 'vietin': vietin_interest[3] }}
+    return render (request, 'home.html', context= two_months)
+def three (request):
+    three_months = {'three_months' : {'vcb': vcb_interest[3] , 'tcb': tcb_interest[1] , 'bidv': bidv_interest[2] , 'vietin': vietin_interest[6] }}
+    return render (request, 'home.html', context= three_months)
+def four (request):
+    four_months = {'four_months' : {'vcb': vcb_interest[3] , 'tcb': tcb_interest[1] , 'bidv': bidv_interest[2] , 'vietin': vietin_interest[6] }}
+    return render (request, 'home.html', context= four_months)
+def five (request):
+    five_months = {'five_months' : {'vcb': vcb_interest[3] , 'tcb': tcb_interest[1] , 'bidv': bidv_interest[2] , 'vietin': vietin_interest[6] }}
+    return render (request, 'home.html', context= five_months)
+def six (request):
+    six_months = {'six_months' : {'vcb': vcb_interest[4] , 'tcb': tcb_interest[2] ,'bidv': bidv_interest[3] , 'vietin': vietin_interest[8] }}
+    return render (request, 'home.html', context= six_months)
+def seven (request):
+    seven_months ={'seven_months' :{'vcb': vcb_interest[4] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[3] , 'vietin': vietin_interest[8] }}
+    return render (request, 'home.html', context= seven_months)
+def eight (request):
+    eight_months = {'eight_months' : {'vcb': vcb_interest[4] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[3] , 'vietin': vietin_interest[8] }}
+    return render (request, 'home.html', context= eight_months)
+def nine (request):
+    nine_months = {'nine_months' : {'vcb': vcb_interest[4] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[3] , 'vietin': vietin_interest[8] }}
+    return render (request, 'home.html', context= nine_months)
+def ten (request):
+    ten_months = {'ten_months' :{'vcb': vcb_interest[4] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }}
+    return render (request, 'home.html', context= ten_months)
+def eleven (request):
+    eleven_months = {'eleven_months':{'vcb': vcb_interest[4] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }}
+    return render (request, 'home.html', context= eleven_months)
+def twelve (request):
+    twelve_months = {'twelve_months': {'vcb': vcb_interest[5] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }}
+    return render (request, 'home.html', context= twelve_months)
+def twenty_four (request):
+    twenty_four_months = {'twenty_four_months':{'vcb': vcb_interest[5] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }}
+    return render (request, 'home.html', context= twenty_four_months)
+def thirty_six (request):
+    thirty_six_months = {'thirty_six_months':{'vcb': vcb_interest[5] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }}
+    return render (request, 'home.html', context= thirty_six_months)
 
-below_one_month = {'vcb': vcb_interest[0] , 'tcb': tcb_interest[0] , 'bidv': bidv_interest[0] , 'vietin': vietin_interest[2] }
-one_month = {'vcb': vcb_interest[2] , 'tcb': tcb_interest[1] , 'bidv': bidv_interest[1] , 'vietin': vietin_interest[3] }
-two_months = {'vcb': vcb_interest[2] , 'tcb': tcb_interest[1] ,'bidv': bidv_interest[1] , 'vietin': vietin_interest[3] }
-three_months = {'vcb': vcb_interest[3] , 'tcb': tcb_interest[1] , 'bidv': bidv_interest[2] , 'vietin': vietin_interest[6] }
-four_months = {'vcb': vcb_interest[3] , 'tcb': tcb_interest[1] , 'bidv': bidv_interest[2] , 'vietin': vietin_interest[6] }
-five_months = {'vcb': vcb_interest[3] , 'tcb': tcb_interest[1] , 'bidv': bidv_interest[2] , 'vietin': vietin_interest[6] }
-six_months = {'vcb': vcb_interest[4] , 'tcb': tcb_interest[2] ,'bidv': bidv_interest[3] , 'vietin': vietin_interest[8] }
-seven_months = {'vcb': vcb_interest[4] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[3] , 'vietin': vietin_interest[8] }
-eight_months = {'vcb': vcb_interest[4] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[3] , 'vietin': vietin_interest[8] }
-nine_months = {'vcb': vcb_interest[4] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[3] , 'vietin': vietin_interest[8] }
-ten_months = {'vcb': vcb_interest[4] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }
-eleven_months = {'vcb': vcb_interest[4] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }
-twelve_months = {'vcb': vcb_interest[5] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }
-twenty_four_months = {'vcb': vcb_interest[5] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }
-thirty_six_months = {'vcb': vcb_interest[5] , 'tcb': tcb_interest[2] , 'bidv': bidv_interest[4] , 'vietin': vietin_interest[10] }
 
+# gộp views dưới thành 1 views mà truyền vào các tham số là các dict về thông tin lãi suất
 @login_required
 
 def lowest1(request):
+
     lowest = min(below_one_month.items(), key=lambda x: x[1])
     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
     response = HttpResponse(res)
@@ -252,6 +280,12 @@ def lowest15(request):
     response = HttpResponse(res)
     return response
 
+def lowest(request, interest):
+    interest = request.GET.get('value')
+    lowest = min(interest.items(), key=lambda x: x[1])
+    res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
+    response = HttpResponse(res)
+    return response
 
 
 

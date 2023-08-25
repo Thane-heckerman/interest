@@ -9,7 +9,7 @@ urlpatterns =  [
     path('register/',views.register, name='register'),
     path('login/',auth_views.LoginView.as_view(template_name="login.html"), name="login"),
     path('logout/',auth_views.LogoutView.as_view(next_page='/Home'),name='logout'),
-    path('interest/lowest_below_1_month/', login_required(views.lowest1), name='below 1 month'),
+    path('lowest_below_1_month/', login_required(views.lowest1), name='below 1 month'),
     path('lowest_1_month/', login_required(views.lowest2), name='1 month'),
     path('lowest_2_month/', login_required(views.lowest3), name='2 months'),
     path('lowest_3_month/', login_required(views.lowest4), name='3 months'),
@@ -25,5 +25,4 @@ urlpatterns =  [
     path('lowest_24_month/', login_required(views.lowest14), name='24 months'),
     path('lowest_36_month/', login_required(views.lowest15), name='36 months'),
     path('delete/<int:id>/',views.delete_history, name='delete_history'),
-    path('interest/lowest/<>/', views.lowest, name='lowest'),
 ]

@@ -77,7 +77,14 @@
             window.location.href = "{% url '36 months' %}";
         };
     })    
+
     </script>
+    <h1> on - off history tracking </h1>
+    <p>Trạng thái hiện tại: {{ status }}</p>
+    <p>Click để {{ action }}</p>
+
+    <a href = "{% url 'changeStatus' %}" >ấn zoo</a> 
+    <br>
     <h1>History Data</h1>
     <table>
         <tr>
@@ -97,7 +104,6 @@
                 <td> <a href = "{% url 'delete_history' item.id %}">Delete</a></td>
             </tr>
         {% endfor %}
-    
     </table>
 </body>
 </html>

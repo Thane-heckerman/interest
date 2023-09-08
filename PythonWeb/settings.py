@@ -49,7 +49,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'Home.middleware.SearchHistory',
+    
 ]
+
 
 ROOT_URLCONF = 'PythonWeb.urls'
 

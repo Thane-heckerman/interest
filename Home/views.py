@@ -7,7 +7,8 @@ import json
 from .forms import RegistrationForms
 from django.contrib.auth.decorators import login_required
 from .models import History
-from .middleware import SearchHistory
+from .models import statusTracking
+from django.conf import settings
 # Create your views here.
 
 #tạo hàm login
@@ -27,7 +28,8 @@ def register(request):
 
 #trang chủ
 def index(request):
-   return render(request,'mainpage.html')
+    return render(request, 'mainpage.html')
+
 
 #logic code
 @login_required
@@ -248,12 +250,25 @@ def lowest15(request):
     response = HttpResponse(res)
     return response
 
-# def lowest(request, interest):
-#     interest = request.GET.get('value')
-#     lowest = min(interest.items(), key=lambda x: x[1])
-#     res = str(lowest[0]) + ':' + ' ' + str(lowest[1])
-#     response = HttpResponse(res)
-#     return response
+#Hàm update db is_enabled
 
+def changeStatus(request):
+    status = statusTracking.objects.filter(id=1).first()
 
+    is_enabled = status.is_enabled
+    
+    if is_enabled == True:  
+        print('true')
+        status.is_enabled = False
+        status.save()
+        # return HttpResponse('đã tắt')
+    
+    # else is_enabled == False:
+    else:
+        print('False')
+        status.is_enabled = True
+        status.save()
+        # return HttpResponse('đã bật')
+    
+    return HttpResponse('Đã thay đổi trạng thái thành công')
 

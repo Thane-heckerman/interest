@@ -12,6 +12,7 @@ class SearchHistory:
 
     def __call__(self, request):
         status = statusTracking.objects.filter(id=1).first()
+        request.status = status
         if status.is_enabled == True:
             ignore_urls = ['/Home/interest/', '/Home/logout/', '/Home/login/', '/Home/', '/Home/history/']
             if request.user.is_authenticated and not request.path in ignore_urls and not request.path.startswith('/Home/delete/') and hasattr(request, 'resolver_match') and isinstance(request.resolver_match, ResolverMatch) :

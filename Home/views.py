@@ -34,6 +34,7 @@ def index(request):
 #logic code
 @login_required
 def interest(request):
+    status = request.status
     user_id = request.user.id
     data = History.objects.all().order_by('-id').filter(user_id = user_id)[:10]
     return render(request, 'home.html', {'data':data})
@@ -259,6 +260,8 @@ def changeStatus(request):
     
     if is_enabled == True:  
         print('true')
+        context = {'status': 'đang bật',
+                   'action': 'tắt ghi lịch sử'}
         status.is_enabled = False
         status.save()
         # return HttpResponse('đã tắt')
@@ -266,9 +269,15 @@ def changeStatus(request):
     # else is_enabled == False:
     else:
         print('False')
+        context = {'status': 'tắt',
+                   'action': 'bật ghi lịch sử'}
         status.is_enabled = True
         status.save()
         # return HttpResponse('đã bật')
     
-    return HttpResponse('Đã thay đổi trạng thái thành công')
+    return render(request,'onofftracking.html', context=context)
 
+#hàm redirect đến trang toggle history tracking
+
+def redirectToggle(request):
+    return render (request, 'onofftracking.html')

@@ -5,27 +5,34 @@ from .models import History
 from django.urls import ResolverMatch
 from .models import statusTracking
 import requests
+from django.contrib.auth.models import User
 
 class SearchHistory:
     def __init__(self,get_response):
         self.get_response = get_response
 
     def __call__(self, request):
-        status = statusTracking.objects.filter(id=1).first()
-        request.status = status
-        if status.is_enabled == True:
-            ignore_urls = ['/Home/interest/', '/Home/logout/', '/Home/login/', '/Home/', '/Home/history/']
-            if request.user.is_authenticated and not request.path in ignore_urls and not request.path.startswith('/Home/delete/') and hasattr(request, 'resolver_match') and isinstance(request.resolver_match, ResolverMatch) :
-            # request.path not in ignored_urls:
-                response = self.get_response(request)
-                res = str(response.content).replace('b','',1)
-                History.objects.create(user_id=request.user, url=request.path, period = request.resolver_match.url_name,result = res)     
+        user = request.user
+        if user is int:
+        # status = statusTracking.objects.filter(id=1).first()
+            status = statusTracking.objects.get(user_id_id = user)
+            status = status.is_enabled
+            print(status)
+            if status == True:
+                ignore_urls = ['/Home/interest/', '/Home/logout/', '/Home/login/', '/Home/', '/Home/history/']
+                if request.user.is_authenticated and not request.path in ignore_urls and not request.path.startswith('/Home/delete/') and hasattr(request, 'resolver_match') and isinstance(request.resolver_match, ResolverMatch) :
+                # request.path not in ignored_urls:
+                    response = self.get_response(request)
+                    res = str(response.content).replace('b','',1)
+                    History.objects.create(user_id=request.user, url=request.path, period = request.resolver_match.url_name,result = res)     
+                else:
+                    return self.get_response(request)        
+            # response = self.get_response(request)
             else:
-                return self.get_response(request)        
-        # response = self.get_response(request)
+                return self.get_response(request)
+            # return self.get_response(request)
         else:
             return self.get_response(request)
-        return self.get_response(request)
     
 # class CustomHeaderMiddleware(MiddlewareMixin):
 #     def process_request(self, request):

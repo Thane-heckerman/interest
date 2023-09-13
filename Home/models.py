@@ -13,4 +13,5 @@ class History(models.Model):
         return self.period
         
 class statusTracking(models.Model):
+    user_id = models.ForeignKey(User,on_delete=models.CASCADE, default=1)
     is_enabled = models.BooleanField(default=True, editable=True,)

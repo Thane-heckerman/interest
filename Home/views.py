@@ -6,8 +6,8 @@ import bs4
 import json
 from .forms import RegistrationForms
 from django.contrib.auth.decorators import login_required
-from .models import History
-from .models import statusTracking
+from Home.models import History, statusTracking
+from django.contrib.auth.models import User
 from django.conf import settings
 # Create your views here.
 
@@ -34,8 +34,9 @@ def index(request):
 #logic code
 @login_required
 def interest(request):
-    status = request.status
     user_id = request.user.id
+    tracking_id = statusTracking.objects.all().filter(user_id = user_id)
+    print(user_id)
     data = History.objects.all().order_by('-id').filter(user_id = user_id)[:10]
     return render(request, 'home.html', {'data':data})
 
@@ -254,30 +255,35 @@ def lowest15(request):
 #Hàm update db is_enabled
 
 def changeStatus(request):
-    status = statusTracking.objects.filter(id=1).first()
+    user_id = request.user
+    user = statusTracking.objects.get(user_id = user_id )
+    print(user_id)
 
-    is_enabled = status.is_enabled
+    status = user.is_enabled
+    print(status)
     
-    if is_enabled == True:  
+    if status == True:  
         print('true')
-        context = {'status': 'đang bật',
-                   'action': 'tắt ghi lịch sử'}
-        status.is_enabled = False
-        status.save()
+        context = {'status': 'đang tắt',
+                   'action': 'bật ghi lịch sử'}
+        statusTracking.objects.filter(user_id=user_id).update(is_enabled=False)
+        
+        
         # return HttpResponse('đã tắt')
     
     # else is_enabled == False:
     else:
         print('False')
-        context = {'status': 'tắt',
-                   'action': 'bật ghi lịch sử'}
-        status.is_enabled = True
-        status.save()
+        context = {'status': 'đang bật',
+                   'action': 'tắt ghi lịch sử'}
+        statusTracking.objects.filter(user_id=user_id).update(is_enabled=True)
+        
         # return HttpResponse('đã bật')
     
     return render(request,'onofftracking.html', context=context)
 
-#hàm redirect đến trang toggle history tracking
+#Hàm redirect đến trang toggle history tracking
 
 def redirectToggle(request):
     return render (request, 'onofftracking.html')
+

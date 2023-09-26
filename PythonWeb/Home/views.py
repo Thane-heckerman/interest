@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from Home.models import History, statusTracking
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 # Create your views here.
 
 #tạo hàm login
@@ -284,4 +286,19 @@ def changeStatus(request):
 
 def redirectToggle(request):
     return render (request, 'onofftracking.html')
+
+@receiver(post_save,sender = User )
+def auto_update(sender, instance, created, **kwargs):
+    users = User.objects.all()
+    if created:
+        print('đã tạo thêm instance trong db History và HistoryTracking')
+        History.objects.create(user = instance)
+        statusTracking.objects.create(user = instance)
+    for user in users:
+        if not statusTracking.objects.filter(user=user) in users:
+    #       Tạo bản ghi statusTracking mới nếu không tồn tại
+            statusTracking.objects.create(user=user)
+            print ('đã update user')
+    else:
+        print ('vì sao request type là Post lại vẫn kích hoạt receiver')
 

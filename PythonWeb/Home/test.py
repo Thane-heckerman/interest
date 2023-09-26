@@ -16,17 +16,18 @@
 # n = transfer_data()
 # print(n)
 
-import sqlite3
+# import sqlite3
 
-# Kết nối vào cơ sở dữ liệu SQLite
-conn = sqlite3.connect('/Users/admin/Desktop/python_training/django_project/PythonWeb/db.sqlite3')
-cursor = conn.cursor()
+# # Kết nối vào cơ sở dữ liệu SQLite
+# conn = sqlite3.connect('/Users/admin/Desktop/python_training/django_project/PythonWeb/db.sqlite3')
+# cursor = conn.cursor()
 
-# Lấy danh sách tất cả các người dùng từ bảng auth_user
-cursor.execute("DELETE FROM django_admin_log WHERE user_id IS 1")
+# # Lấy danh sách tất cả các người dùng từ bảng auth_user
+# cursor.execute("DELETE FROM django_admin_log WHERE user_id IS 1")
 
-# Lưu thay đổi vào cơ sở dữ liệu
-conn.commit()
+# # Lưu thay đổi vào cơ sở dữ liệu
+# conn.commit()
 
-# Đóng kết nối đến cơ sở dữ liệu SQLite
-conn.close()
+# # Đóng kết nối đến cơ sở dữ liệu SQLite
+# conn.close()
+

@@ -30,4 +30,6 @@
 
 # # Đóng kết nối đến cơ sở dữ liệu SQLite
 # conn.close()
+from django.conf import settings
 
+print(settings.BASE_DIR)

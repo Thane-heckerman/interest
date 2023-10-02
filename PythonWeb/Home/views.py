@@ -288,17 +288,12 @@ def redirectToggle(request):
     return render (request, 'onofftracking.html')
 
 @receiver(post_save,sender = User )
-def auto_update(sender, instance, created, **kwargs):
-    users = User.objects.all()
+def auto_update(sender, created,**instance):
+
     if created:
         print('đã tạo thêm instance trong db History và HistoryTracking')
         History.objects.create(user = instance)
         statusTracking.objects.create(user = instance)
-    for user in users:
-        if not statusTracking.objects.filter(user=user) in users:
-    #       Tạo bản ghi statusTracking mới nếu không tồn tại
-            statusTracking.objects.create(user=user)
-            print ('đã update user')
-    else:
-        print ('vì sao request type là Post lại vẫn kích hoạt receiver')
+        post_save.disconnect(auto_update,sender=User)   
+ 
 

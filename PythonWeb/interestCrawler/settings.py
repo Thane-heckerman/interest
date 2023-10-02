@@ -14,7 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Home',
+    'interestCrawler',
 ]
 
 MIDDLEWARE = [
@@ -50,10 +51,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'Home.middleware.SearchHistory',
     
+    
 ]
 
 
-ROOT_URLCONF = 'PythonWeb.urls'
+ROOT_URLCONF = 'interestCrawler.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'PythonWeb.wsgi.application'
+WSGI_APPLICATION = 'interestCrawler.wsgi.application'
 
 
 # Database

@@ -41,6 +41,7 @@ class SearchHistory:
                             # print('url có trong ignore_url nên không lưu')
                             return self.get_response(request)   
             except:
+                statusTracking.objects.create(user_id=user)
                 # print('giờ không có bật chức năng lưu')
                 response = self.get_response(request)
                 return response

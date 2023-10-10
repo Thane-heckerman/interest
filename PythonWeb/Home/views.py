@@ -257,7 +257,7 @@ def lowest15(request):
 
 def changeStatus(request):
     user_id = request.user
-    user = statusTracking.objects.get(user_id_id = user_id )
+    user = statusTracking.objects.get(user_id = user_id )
     print(user)
 
     status = user.is_enabled
@@ -296,5 +296,5 @@ def auto_update(sender,instance, created,**kwargs):
         History.objects.create(user = instance)
         statusTracking.objects.create(user = instance)
         post_save.disconnect(auto_update,sender=instance)   
- 
+
 

@@ -36,9 +36,10 @@ def index(request):
 #logic code
 @login_required
 def interest(request):
+    month = [0,1,2,3,4,5,6,7,8,9,10,11,12,24,36]
     user_id = request.user.id
     data = History.objects.all().order_by('-id').filter(user_id = user_id)[:10]
-    return render(request, 'home.html', {'data':data})
+    return render(request, 'home.html', {'data':data,'month':month})
 
 #delete_history
 def delete_history(request,id):

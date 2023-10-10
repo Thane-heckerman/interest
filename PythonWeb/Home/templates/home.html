@@ -11,20 +11,10 @@
    <h1>ngan hang co lai suat tien gui thap nhat theo tung moc thoi gian </h1>
 
     <select id="box">
-        <option value="alo" selected> chọn thời gian ở đây</option>
-        <option value="0">Dưới 1 tháng </option>
-        <option value="1">1 tháng</option>
-        <option value="2">2 tháng</option>
-        <option value="3">3 tháng</option>
-        <option value="4">4 tháng</option>
-        <option value="5">5 tháng</option>
-        <option value="6">6 tháng</option>
-        <option value="7">7 tháng</option>
-        <option value="8">8 tháng</option>
-        <option value="9">9 tháng</option>
-        <option value="10">10 tháng</option>
-        <option value="11">11 tháng</option>
-        <option value="12">12 tháng</option>
+        <option value="alo" selected> chọn thời gian ở đây</option> 
+        {% for i in month %}
+        <option value = "{{ i }}"> {{ i }} tháng </option>
+        {% endfor %}
         <option value="13">24 tháng</option>
         <option value="14">36 tháng</option>
     </select>

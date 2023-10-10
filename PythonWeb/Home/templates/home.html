@@ -15,8 +15,7 @@
         {% for i in month %}
         <option value = "{{ i }}"> {{ i }} tháng </option>
         {% endfor %}
-        <option value="13">24 tháng</option>
-        <option value="14">36 tháng</option>
+        
     </select>
     <script>
         
@@ -25,8 +24,14 @@
         const intSelectedOption = parseInt(selectedOption, 10);
         const monthList = ["{% url 'below 1 month' %}", "{% url '1 month' %}}", "{% url '2 months' %}", "{% url '3 months' %}", "{% url '4 months' %}", "{% url '5 months' %}", 
         "{% url '6 months' %}", "{% url '7 months' %}", "{% url '8 months' %}", "{% url '9 months' %} ", "{% url '10 months' %}", "{% url '11 months' %}", "{% url '12 months' %}", "{% url '24 months' %}", " {% url '36 months' %}"];
-        if (intSelectedOption !== -1) {
+        if (intSelectedOption < 13) {
             const selectedURL = monthList[selectedOption];
+            window.location.href = selectedURL;
+        } if (intSelectedOption === 24){
+            const selectedURL = monthList[13];
+            window.location.href = selectedURL;
+        } if (intSelectedOption === 36){
+            const selectedURL = monthList[14];
             window.location.href = selectedURL;
         } else {
             alert('Please select a valid time period');

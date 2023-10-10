@@ -40,6 +40,9 @@ class SearchHistory:
                         else:
                             # print('url có trong ignore_url nên không lưu')
                             return self.get_response(request)   
+                else:
+                    response = self.get_response(request)
+                    return response
             except:
                 statusTracking.objects.create(user_id=user)
                 # print('giờ không có bật chức năng lưu')

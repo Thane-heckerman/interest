@@ -22,7 +22,7 @@
         document.getElementById("box").addEventListener("change", function() {
         const selectedOption = this.value;
         const intSelectedOption = parseInt(selectedOption, 10);
-        const monthList = ["{% url 'below 1 month' %}", "{% url '1 month' %}}", "{% url '2 months' %}", "{% url '3 months' %}", "{% url '4 months' %}", "{% url '5 months' %}", 
+        const monthList = ["{% url 'below 1 month' %}", "{% url '1 month' %}", "{% url '2 months' %}", "{% url '3 months' %}", "{% url '4 months' %}", "{% url '5 months' %}", 
         "{% url '6 months' %}", "{% url '7 months' %}", "{% url '8 months' %}", "{% url '9 months' %} ", "{% url '10 months' %}", "{% url '11 months' %}", "{% url '12 months' %}", "{% url '24 months' %}", " {% url '36 months' %}"];
         if (intSelectedOption < 13) {
             const selectedURL = monthList[selectedOption];

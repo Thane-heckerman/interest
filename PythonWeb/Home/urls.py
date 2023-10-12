@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 
 urlpatterns =  [
-    path('', views.index, name='mainpage'),
+    path('', views.index),
     path('interest/',login_required(views.interest), name='interest'),
     path('register/',views.register, name='register'),
     path('login/',auth_views.LoginView.as_view(template_name="login.html"), name="login"),

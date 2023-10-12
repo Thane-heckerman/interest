@@ -15,10 +15,10 @@ class SearchHistory:
         
         if request.user.is_authenticated:
             user = request.user.id
-            try:
+            if statusTracking.objects.get(user_id = user) is not None:
                 status = statusTracking.objects.get(user_id = user)    
                 status1 = status.is_enabled
-                ignore_urls = ['/Home/interest/', '/Home/logout/', '/Home/login/', '/Home/', '/Home/history/','/Home/redirectToggle/','/Home/changeStatus/']
+                ignore_urls = ['/Home/interest/', '/Home/logout/', '/Home/login/', '/Home/', '/Home/history/','/Home/redirectToggle/','/Home/changeStatus/','']
                 if status1 == True:
                     print('đang bật chức năng lưu')
                     # request.path in ignore_urls and
@@ -43,7 +43,7 @@ class SearchHistory:
                 else:
                     response = self.get_response(request)
                     return response
-            except:
+            else:
                 statusTracking.objects.create(user_id=user)
                 # print('giờ không có bật chức năng lưu')
                 response = self.get_response(request)

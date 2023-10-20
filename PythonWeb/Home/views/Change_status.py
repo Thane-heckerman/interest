@@ -2,7 +2,7 @@ from Home.models import StatusTracking
 from django.shortcuts import render
 
 def changeStatus(request):
-    user_id = request.user
+    user_id = request.user.id
     user = StatusTracking.StatusTracking.objects.get(user_id = user_id )
     print(user)
 

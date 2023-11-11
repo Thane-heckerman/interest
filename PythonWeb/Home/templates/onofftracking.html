@@ -8,8 +8,38 @@
 </head>
 <body>
     <h1> on - off history tracking </h1>
-    <p>Trạng thái hiện tại: {{ status }}</p>
-    <p>ấn để {{ action }}</p>
-    <a href = "{% url 'changeStatus'%}" >click here</a> 
+    <p id="status"> Trạng thái hiện tại: {{ status }}</p>
+    <button data-id='Turn_on' value='True'>Bật</button>
+    <button data-id='Turn_off' value='True'>Tắt</button>
+
+    
+    <script>
+    var buttonOn = document.querySelector('button[data-id="Turn_on"]');
+    var buttonOff = document.querySelector('button[data-id="Turn_off"]');
+    buttonOn.addEventListener('click', function() {
+    changeStats('True');
+});
+    buttonOff.addEventListener('click', function() {
+    changeStats('False');
+});
+    function changeStats(value){
+    var userId = {{user_id}};
+    const csrfToken = "{{ csrf_token }}";
+        console.log('đã hoạt động');
+        fetch('/Home/changeStatus/'+userId+'/',{
+            method: 'PATCH',
+            headers: { 'X-CSRFToken': csrfToken, 
+                    'Content-Type': 'application/json',},
+            body: JSON.stringify({'is_enabled':value}),
+                
+        })
+        .then(response => response.text())
+        .then(data => {JSON.stringify(data);
+        console.log(data) 
+        });
+    }
+    
+
+    </script>
 </body>
 </html>

@@ -21,18 +21,9 @@ class SearchHistory:
                 if Tracking.objects.get(user_id = user) is not None and request.path.startswith('/Home/lowest/'):
                     status = Tracking.objects.get(user_id = user)    
                     status1 = status.is_enabled
-                    # urls = ['/Home/lowest_below_1_month/', '/Home/lowest_1_month/', '/Home/lowest_2_month/', '/Home/lowest_3_month', '/Home/lowest_4_month/','/Home/lowest_5_month/','/Home/lowest_6_month/','/Home/lowest_7_month/',
-                    #         '/Home/lowest_8_month/','/Home/lowest_9_month/','/Home/lowest_10_month/','/Home/lowest_11_month/','/Home/lowest_12_month/','/Home/lowest_24_month/','/Home/lowest_36_month/']
                     if status1 == True :
-                        print('đang bật chức năng lưu')
-                        # request.path in ignore_urls and
-
-                        # if request.path not in urls:
-                        #     # print('không được ghi lịch sử vì url trong ignore')
-                        #     return self.get_response(request)
+                        # print('đang bật chức năng lưu')
                         
-                        # else:  
-                            # print ('k ghi chức năng delete')
                         response = self.get_response(request)
                         period = str(json.loads(request.body)) + ' tháng'
                         res = str(response.content).replace('b','',1)
@@ -51,8 +42,8 @@ class SearchHistory:
                 # print('giờ không có bật chức năng lưu')
                 response = self.get_response(request)
                 return response
-            # return self.get_response(request)
         else:
+            # return self.get_response
             if request.path not in  ['/Home/','/Home/login/','/Home/logout/','/Home/register/'] :
                 response = HttpResponseRedirect('/Home/')
                 return response

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import requests
 
 class History(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE, blank=True , null=True)
@@ -8,5 +9,7 @@ class History(models.Model):
     url = models.URLField(max_length=200)
     date = models.DateField(auto_now=True)
     
-    def __unicode__(self):
+    def __unicode__(self,request):
+        self.period = request.body
         return self.period
+    

@@ -20,6 +20,7 @@
     <div id="result">Kết quả
         <!-- Nội dung kết quả sẽ được hiển thị ở đây -->
     </div>
+    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
         
@@ -46,14 +47,13 @@
         });
 
     </script>
-
+    
     <p> Bật/Tắt ghi lịch sử </p>
 
     <a href = "{% url 'redirectToggle'%}" >ấn để thay đổi</a> 
     <h1>History Data</h1>
     <table>
         <tr>
-            <th>Người dùng</th>
             <th>Kết quả</th>
             <th>Thời gian</th>
             <th>URL</th>
@@ -61,14 +61,34 @@
         </tr>
         {% for item in data %}
             <tr>
-                <td>{{ item.user }}</td>
                 <td>{{ item.result }}</td>
                 <td>{{ item.period }}</td>
                 <td>{{ item.url }}</td>
                 <td>{{ item.date }}</td>
-                <td> <a href = "{% url 'delete_history' item.id %}">Xoá</a></td>
+                <td> <button class='delete_history' data-id = '{{ item.id }}'>Xoá</button></td>
             </tr>
         {% endfor %}
-    </table>
+      
+    <script>
+            const buttons = document.querySelectorAll('.delete_history');
+            buttons.forEach((button) => {
+            button.addEventListener("click", function(event){
+            event.preventDefault();
+            const csrfToken = "{{ csrf_token }}";
+            var id = this.dataset.id;
+            console.log('đã hoạt động')
+            fetch('/Home/history/delete/' + id + '/',{
+                method: 'DELETE',
+                headers: { 'X-CSRFToken': csrfToken, 
+                        'Content-Type': 'application/json',},
+                    
+            })
+            .then(response => response.text())
+            .then(data => {
+            alert(data);})
+            });
+    });
+    </script>
+          
 </body>
 </html>
